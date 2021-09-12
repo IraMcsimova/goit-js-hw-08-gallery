@@ -103,8 +103,27 @@ lightbox.closeBtn.addEventListener("click", onImageClick);
 
 function onImageClick(event) {
   event.preventDefault();
+
   lightbox.modalWindow.classList.toggle("is-open");
+
   if (lightbox.modalWindow.classList.contains("is-open")) {
     lightbox.image.setAttribute("src", event.target.attributes[2].value);
+
+    window.addEventListener("keydown", onEscKeyPress);
+
+    function onEscKeyPress(e) {
+      const ESC_KEY_CODE = "Escape";
+      if (e.code === ESC_KEY_CODE) {
+        lightbox.modalWindow.classList.remove("is-open");
+      }
+    }
+  } else {
+    lightbox.image.removeAttribute("src");
   }
+}
+
+lightbox.overlay.addEventListener("click", onOverlayCloseClick);
+
+function onOverlayCloseClick(evt) {
+  lightbox.modalWindow.classList.remove("is-open");
 }
