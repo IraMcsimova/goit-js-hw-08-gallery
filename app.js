@@ -97,11 +97,14 @@ const lightbox = {
   image: document.querySelector(".lightbox__image"),
   closeBtn: document.querySelector(".lightbox__button"),
 };
-// console.log(lightbox.image.setAttribute("src"));
+
 gallery.addEventListener("click", onImageClick);
 lightbox.closeBtn.addEventListener("click", onImageClick);
 
 function onImageClick(event) {
   event.preventDefault();
   lightbox.modalWindow.classList.toggle("is-open");
+  if (lightbox.modalWindow.classList.contains("is-open")) {
+    lightbox.image.setAttribute("src", event.target.attributes[2].value);
+  }
 }
